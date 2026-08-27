@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wasitpol | Profile</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #080808;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #b6ff00;
+            filter: blur(180px);
+            opacity: 0.12;
+            top: -150px;
+            right: -100px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: #00ffff;
+            filter: blur(180px);
+            opacity: 0.08;
+            bottom: -150px;
+            left: -100px;
+            z-index: -1;
+        }
+
+        /* Navbar */
+
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 900px;
+            padding: 15px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(20,20,20,0.7);
+            backdrop-filter: blur(20px);
+
+            border: 1px solid #333;
+            border-radius: 20px;
+
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo span {
+            color: #b6ff00;
+        }
+
+        nav button {
+            background: transparent;
+            border: 1px solid #444;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        nav button:hover {
+            background: #b6ff00;
+            color: black;
+        }
+
+        /* Hero */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeUp 1s ease;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid #333;
+            border-radius: 50px;
+            color: #b6ff00;
+            font-size: 13px;
+            margin-bottom: 25px;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .hero h1 {
+            font-size: clamp(50px, 9vw, 100px);
+            line-height: 0.9;
+            letter-spacing: -5px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #b6ff00;
+        }
+
+        .hero p {
+            color: #888;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* Buttons */
+
+        .buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 22px;
+            border-radius: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #b6ff00;
+            color: black;
+        }
+
+        .secondary {
+            background: #171717;
+            color: white;
+            border: 1px solid #333;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(182,255,0,0.2);
+        }
+
+        /* Sections */
+
+        section {
+            max-width: 950px;
+            margin: auto;
+            padding: 100px 25px;
+        }
+
+        .section-title {
+            font-size: 45px;
+            margin-bottom: 35px;
+        }
+
+        .section-title span {
+            color: #b6ff00;
+        }
+
+        /* Profile Card */
+
+        .profile-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(20,20,20,0.75);
+            border: 1px solid #292929;
+            border-radius: 22px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: #b6ff00;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .card small {
+            color: #666;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+        }
+
+        .card p {
+            color: #999;
+            line-height: 1.7;
+        }
+
+        /* Project */
+
+        .project {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-number {
+            color: #b6ff00;
+            font-size: 13px;
+            margin-bottom: 25px;
+        }
+
+        .project h3 {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .project p {
+            margin-bottom: 25px;
+        }
+
+        /* Clock */
+
+        #clock {
+            margin-top: 25px;
+            color: #b6ff00;
+            font-family: monospace;
+            font-size: 15px;
+        }
+
+        /* Footer */
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid #222;
+            color: #555;
+            font-size: 13px;
+        }
+
+        /* Modal */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 450px;
+            background: #151515;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            animation: fadeUp 0.3s ease;
+        }
+
+        .modal-box h2 {
+            margin-bottom: 15px;
+        }
+
+        .modal-box p {
+            color: #999;
+            line-height: 1.8;
+        }
+
+        .close {
+            float: right;
+            background: #222;
+            border: none;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Toast */
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+
+            background: white;
+            color: black;
+
+            padding: 13px 20px;
+            border-radius: 12px;
+
+            opacity: 0;
+            transition: 0.3s;
+
+            z-index: 300;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Animation */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile */
+
+        @media (max-width: 700px) {
+
+            nav {
+                width: 94%;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .profile-card {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 70px 20px;
+            }
+
+            .section-title {
+                font-size: 38px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            WASITPOL<span>.</span>
+        </div>
+
+        <button onclick="openModal()">
+            About Me
+        </button>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ✦ STUDENT • DEVELOPER
+            </div>
+
+            <h1>
+                Hi, I'm<br>
+                <span>Wasitpol</span>
+            </h1>
+
+            <p>
+                วสิษฐ์พล แก้วรัศมีกุล<br>
+                นักศึกษาที่สนใจการสร้างเว็บไซต์
+                และ Web Application
+            </p>
+
+            <div class="buttons">
+
+                <a href="#profile" class="btn primary">
+                    Explore Profile ↓
+                </a>
+
+                <a href="https://github.com/wasitpol-dev"
+                   target="_blank"
+                   class="btn secondary">
+                    GitHub ↗
+                </a>
+
+            </div>
+
+            <div id="clock"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROFILE -->
+
+    <section id="profile">
+
+        <div class="section-title">
+            About <span>Me</span>
+        </div>
+
+        <div class="profile-card">
+
+            <div class="card">
+
+                <small>NAME</small>
+
+                <h3>
+                    วสิษฐ์พล แก้วรัศมีกุล
+                </h3>
+
+            </div>
+
+
+            <div class="card">
+
+                <small>STUDENT ID</small>
+
+                <h3>
+                    6823765547
+                </h3>
+
+                <button
+                    class="btn secondary"
+                    style="margin-top:15px"
+                    onclick="copyID()">
+
+                    📋 Copy ID
+
+                </button>
+
+            </div>
+
+
+            <div class="card">
+
+                <small>FACULTY</small>
+
+                <h3>
+                    วิทยาลัยนวัตกรรม
+                    มหาวิทยาลัยธรรมศาสตร์
+                </h3>
+
+            </div>
+
+
+            <div class="card">
+
+                <small>INTEREST</small>
+
+                <h3>
+                    Web Development
+                </h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECT -->
+
+    <section>
+
+        <div class="section-title">
+            My <span>Idea</span>
+        </div>
+
+        <div class="card project">
+
+            <div class="project-number">
+                PROJECT 01
+            </div>
+
+            <h3>
+                📅 Study Planner
+            </h3>
+
+            <p>
+                แอปจัดตารางเรียนสำหรับนักศึกษา
+                ช่วยจัดตารางเรียน วางแผนเวลาอ่านหนังสือ
+                และช่วยให้สามารถจัดการเวลาได้ง่ายขึ้น
+            </p>
+
+            <button
+                class="btn primary"
+                onclick="showMessage()">
+
+                View Concept →
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section>
+
+        <div class="card" style="text-align:center">
+
+            <div class="section-title">
+                Let's <span>Connect.</span>
+            </div>
+
+            <p style="color:#888;margin-bottom:25px">
+                สามารถดูโปรเจกต์และโค้ดเพิ่มเติมได้ที่ GitHub
+            </p>
+
+            <a
+                href="https://github.com/wasitpol-dev"
+                target="_blank"
+                class="btn primary">
+
+                Visit My GitHub ↗
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        © 2026 Wasitpol
+        • DX212 Profile
+
+    </footer>
+
+
+    <!-- MODAL -->
+
+    <div class="modal" id="modal">
+
+        <div class="modal-box">
+
+            <button
+                class="close"
+                onclick="closeModal()">
+
+                ✕
+
+            </button>
+
+            <h2>
+                👋 Hello!
+            </h2>
+
+            <p>
+                ผมชื่อ วสิษฐ์พล แก้วรัศมีกุล
+                เป็นนักศึกษาวิทยาลัยนวัตกรรม
+                มหาวิทยาลัยธรรมศาสตร์
+                และสนใจด้าน Web Development
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOAST -->
+
+    <div class="toast" id="toast">
+        คัดลอกรหัสนักศึกษาแล้ว ✓
+    </div>
+
+
+    <script>
+
+        /* Clock */
+
+        function updateClock() {
+
+            const now = new Date();
+
+            const time = now.toLocaleTimeString("th-TH");
+
+            document.getElementById("clock").innerText =
+                "● Current time: " + time;
+
+        }
+
+        updateClock();
+
+        setInterval(updateClock, 1000);
+
+
+        /* Copy ID */
+
+        function copyID() {
+
+            navigator.clipboard.writeText("6823765547");
+
+            const toast =
+                document.getElementById("toast");
+
+            toast.classList.add("show");
+
+            setTimeout(() => {
+
+                toast.classList.remove("show");
+
+            }, 2000);
+
+        }
+
+
+        /* Modal */
+
+        function openModal() {
+
+            document
+                .getElementById("modal")
+                .classList.add("active");
+
+        }
+
+        function closeModal() {
+
+            document
+                .getElementById("modal")
+                .classList.remove("active");
+
+        }
+
+
+        /* Project Button */
+
+        function showMessage() {
+
+            alert(
+                "Study Planner 🚀\n\n" +
+                "แอปจัดตารางเรียนสำหรับนักศึกษา"
+            );
+
+        }
+
+
+        /* Close modal when click outside */
+
+        document
+            .getElementById("modal")
+            .addEventListener("click", function(e) {
+
+                if (e.target === this) {
+
+                    closeModal();
+
+                }
+
+            });
+
+    </script>
+
+</body>
+</html>
